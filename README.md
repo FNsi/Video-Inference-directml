@@ -7,10 +7,6 @@ This repository is an inference repo similar to that of the ESRGAN inference rep
 - SOFVSR ([traiNNer](https://github.com/victorca25/traiNNer/) Version)
   - Original SOFVSR SR net
   - RRDB SR net
-- RIFE ([traiNNer](https://github.com/victorca25/traiNNer/) Version)
-  - Supports regular and 'HD' RIFE models
-  - Original RIFE models will need to be converted to BasicSR's single-model .pth file (conversion script located in utils folder)
-- [TecoGAN-Pytorch](https://github.com/skycrapers/TecoGAN-PyTorch)
 
 ## Additional features
 
