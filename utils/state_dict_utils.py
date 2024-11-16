@@ -77,5 +77,5 @@ def get_model_from_state_dict(state_dict, device):
             frame_size = state_dict['SR.body.0.weight'].shape[1]
             num_frames = (((frame_size - 1) // scale ** 2) + 1)
             return SOFVSRModel(only_y=True, scale=scale, num_frames=num_frames,
-                                num_channels=num_channels, SR_net='sofvsr', img_ch=1, device=device)
+                                num_channels=num_channels, SR_net='sofvsr', img_ch=1, device=device).half()
             

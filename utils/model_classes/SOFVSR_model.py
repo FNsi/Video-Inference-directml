@@ -8,11 +8,14 @@ import numpy as np
 import torch
 from torch.autograd import Variable
 
+import torch_directml
+
+dml = torch_directml.device()
 
 class SOFVSRModel(BaseModel):
     def __init__(self, only_y=True, num_frames=3, num_channels=320, scale=4, SR_net='sofvsr', img_ch=1, device=None):
         super(SOFVSRModel, self).__init__()
-        self.device = device
+        self.device =  device
 
         self.model = SOFVSR(scale=scale, n_frames=num_frames,
                             channels=num_channels, SR_net=SR_net, img_ch=img_ch).eval()

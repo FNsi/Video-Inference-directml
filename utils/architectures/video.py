@@ -5,6 +5,9 @@ import torch.nn.functional as F
 import numpy as np
 from torch.autograd import Variable
 
+import torch_directml
+
+dml = torch_directml.device()
 
 def optical_flow_warp(image, flow,
               mode='vsr',
@@ -65,7 +68,7 @@ def optical_flow_warp(image, flow,
     grid[:, :, 1] = 2.0 * grid[:, :, 1] / (h - 1) - 1.0
     grid = grid.transpose(2, 0, 1)
     grid = np.tile(grid, (b, 1, 1, 1))
-    grid = Variable(torch.Tensor(grid))
+    grid = Variable(torch.Tensor(grid).to(dml))
     if flow.is_cuda == True:
         grid = grid.cuda()
     # '''

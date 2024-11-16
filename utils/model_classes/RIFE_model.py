@@ -1,4 +1,4 @@
-from numpy.lib.function_base import interp
+from numpy import interp
 from utils.model_classes.base_model import BaseModel
 from utils.architectures.RIFE_arch import RIFE
 from utils.architectures.RIFE_HD_arch import RIFE as RIFEHD

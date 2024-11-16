@@ -9,6 +9,10 @@ from utils.architectures.video import optical_flow_warp
 from utils.architectures.RRDBNet_arch import RRDBNet
 from utils.architectures.PAN_arch import PAN
 
+import torch_directml
+
+dml = torch_directml.device()
+
 #TODO: 
 # - change pixelshuffle upscales with available options in block (can also add pa_unconv with pixel attention)
 # - make the upscaling layers automatic
@@ -148,7 +152,7 @@ class OFRnet(nn.Module):
         # print("part 1") #TODO
         x_L1 = self.pool(x)
         b, c, h, w = x_L1.size()
-        input_L1 = torch.cat((x_L1, torch.zeros(b, 2, h, w).cuda()), 1)
+        input_L1 = torch.cat((x_L1, torch.zeros(b, 2, h, w).to(dml)), 1)
         optical_flow_L1 = self.RNN2(self.RNN1(input_L1))
         # optical_flow_L1_upscaled = F.interpolate(optical_flow_L1, scale_factor=2, mode='bilinear', align_corners=False) * 2
         
