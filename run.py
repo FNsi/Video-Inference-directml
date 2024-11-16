@@ -2,9 +2,15 @@ import argparse
 import torch
 import os
 import sys
-import progressbar
+from progressbar import ProgressBar
+
+import torch_directml
+dml = torch_directml.device()
 
 from utils.state_dict_utils import get_model_from_state_dict
+
+import torch_directml
+dml = torch_directml.device()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('model')
@@ -34,15 +40,13 @@ elif os.path.isfile(args.input) and args.input.split('.')[-1].lower() in ['mp4',
 elif not os.path.isfile(args.input) and not os.path.isfile(args.output) and not os.path.exists(args.output):
     os.mkdir(args.output)
 
-device = torch.device('cpu' if args.cpu else 'cuda')
+device = torch.device('cpu') if args.cpu else dml
 
 input_folder = os.path.normpath(args.input)
 output_folder = os.path.normpath(args.output)
 
-if args.fp16:
-    torch.set_default_tensor_type(
-        torch.HalfTensor if args.cpu else torch.cuda.HalfTensor
-    )
+
+
 
 
 def main():
@@ -72,7 +76,7 @@ def main():
 
     # Inference loop
     # , redirect_stdout=True):
-    for idx in progressbar.progressbar(range(model.num_padding, len(io) - model.num_padding)):
+    for idx in ProgressBar()(range(model.num_padding, len(io) - model.num_padding)):
 
         LR_list = model.get_frames(idx)
 
