@@ -18,7 +18,7 @@ This repository is an inference repo similar to that of the ESRGAN inference rep
    
 For the rest wheels needed, just install the last will be ok.
 
-
+Bug needed to fix: --chop_forward.
 
 **Below is original description.**
  ____________________________
