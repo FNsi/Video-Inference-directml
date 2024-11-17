@@ -1,5 +1,6 @@
 from utils.io_classes.base_io import BaseIO
 
+import os
 import numpy as np
 import cv2
 import ffmpeg
@@ -39,6 +40,13 @@ class VideoIO(BaseIO):
         framerate = int(video_stream['r_frame_rate'].split(
             '/')[0]) / int(video_stream['r_frame_rate'].split('/')[1])
         vcodec = 'libx264'
+
+        # Ensure the output path has a valid extension
+        if not os.path.splitext(self.output_path)[1]:
+            self.output_path += '.mp4'  # Default to MP4
+
+        # Print the output path for debugging
+        print(f"Output path: {self.output_path}")
 
         # Imports video to buffer
         out, _ = (

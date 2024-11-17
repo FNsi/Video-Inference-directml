@@ -25,9 +25,12 @@ class BaseIO():
         """
         Pad data by prepending and appending frames.
         """
-        for _ in range(num_padding):
-            self.data.insert(0, self.data[0])
-            self.data.append(self.data[-1])
+        if self.data:
+            for _ in range(num_padding):
+                self.data.insert(0, self.data[0])
+                self.data.append(self.data[-1])
+        else:
+            print("The list is empty. Cannot pad.")
 
     def save_frames(self):
         """
