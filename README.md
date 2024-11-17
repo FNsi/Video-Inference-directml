@@ -6,7 +6,23 @@ This repository is an inference repo similar to that of the ESRGAN inference rep
 
 - SOFVSR ([traiNNer](https://github.com/victorca25/traiNNer/) Version)
   - Original SOFVSR SR net
-  - RRDB SR net
+  - RRDB SR net ? no clue.
+
+
+
+ Wheels needed : 
+   torch==2.4.1 
+   torch-directml==0.2.5.dev240914
+   numpy==2.1.3
+   progressbar==2.5
+   
+For the rest wheels needed, just install the last will be ok.
+
+
+
+**Below is original description.**
+ ____________________________
+ 
 
 ## Additional features
 
