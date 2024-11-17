@@ -78,15 +78,14 @@ class SOFVSRModel(BaseModel):
             LR = np.concatenate((LR_list), axis=2)  # h, w, t
             # Tensor, [CT',H',W'] or [T, H, W]
             LR = util.np2tensor(LR, bgr2rgb=False, add_batch=True)
-            if args.fp16:
-                LR = LR.half()
+#            LR = LR.half()
 
             # generate Cr, Cb channels using bicubic interpolation
             LR_bicubic = util.bgr2ycbcr(LR_bicubic, only_y=False)
             LR_bicubic = util.np2tensor(
                 LR_bicubic, bgr2rgb=False, add_batch=True)
-            if args.fp16:
-                LR_bicubic = LR_bicubic.half()
+#            LR_bicubic = LR_bicubic.half()
+
         else:
             # TODO: Figure out why this is necessary
             LR_list = [cv2.cvtColor(LR_img, cv2.COLOR_BGR2RGB) for LR_img in LR_list]
@@ -103,8 +102,7 @@ class SOFVSRModel(BaseModel):
             LR = util.np2tensor(LR, bgr2rgb=True, add_batch=False)
             LR = LR.view(c, t, h_LR, w_LR)  # Tensor, [C,T,H,W]
             LR = LR.transpose(0, 1)  # Tensor, [T,C,H,W]
-            if args.fp16:
-                LR = LR.half()
+#            LR = LR.half()
             LR = LR.unsqueeze(0)
 
             LR_bicubic = []
@@ -136,8 +134,8 @@ class SOFVSRModel(BaseModel):
         else:
 
             with torch.no_grad():
-                self.model.to(self.device)
-                _, _, _, fake_H = self.model(LR.to(self.device))
+                self.model.to(dml)
+                _, _, _, fake_H = self.model(LR.to(dml))
 
             SR = fake_H.detach()[0].float().cpu()
             if self.only_y:

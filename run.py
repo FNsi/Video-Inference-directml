@@ -28,6 +28,7 @@ parser.add_argument('--fp16', action='store_true',
                     help='Use floating-point 16 mode for faster inference')
 args = parser.parse_args()
 
+
 is_video = False
 if not os.path.exists(args.input):
     print('Error: Folder [{:s}] does not exist.'.format(args.input))
@@ -50,7 +51,7 @@ output_folder = os.path.normpath(args.output)
 
 
 def main():
-    state_dict = torch.load(args.model)
+    state_dict = torch.load(args.model, weights_only=True)
 
     model = get_model_from_state_dict(state_dict, device)
 

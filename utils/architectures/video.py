@@ -79,14 +79,14 @@ def optical_flow_warp(image, flow,
         flow_1 = torch.unsqueeze(flow[:, 1, :, :] * 31 / (h - 1), dim=1)
         grid = grid + torch.cat((flow_0, flow_1), 1)
         grid = grid.transpose(1, 2)
-        grid = grid.transpose(3, 2)
+        grid = grid.transpose(3, 2).to(dml)
     elif mode == 'edvr':
         # EDVR scales the grid after summing the flow
         vgrid = grid + flow
         # scale grid to [-1,1]
         vgrid_x = 2.0 * vgrid[:, :, :, 0] / max(w - 1, 1) - 1.0
         vgrid_y = 2.0 * vgrid[:, :, :, 1] / max(h - 1, 1) - 1.0
-        grid = torch.stack((vgrid_x, vgrid_y), dim=3) #vgrid_scaled
+        grid = torch.stack((vgrid_x, vgrid_y), dim=3).to(dml) #vgrid_scaled
     
     #TODO: added "align_corners=True" to maintain original behavior, needs testing:
     # UserWarning: Default grid_sample and affine_grid behavior will be changed to align_corners=False from 1.4.0. See the documentation of grid_sample for details.
@@ -109,7 +109,7 @@ def optical_flow_warp(image, flow,
 
         return output * mask
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu") if torch.cuda.is_available() else dml
 backwarp_tenGrid = {}
 
 
