@@ -18,8 +18,10 @@ This repository is an inference repo similar to that of the ESRGAN inference rep
    
 For the rest wheels needed, just install the last will be ok.
 
-Bug needed to fix: --chop_forward.
-
+Bug needed to fix:
+    --chop_forward.
+    memory leak during gpu-cpu switch.
+    
 **Below is original description.**
  ____________________________
  
