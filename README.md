@@ -20,7 +20,7 @@ For the rest wheels needed, just install the last will be ok.
 
 Bug needed to fix:
     --chop_forward.
-    memory leak during gpu-cpu switch.
+    --memory leak?
 
 no clue to know how dml release memory😅
 so that would not be useful unless for small amout pic cycle. 
