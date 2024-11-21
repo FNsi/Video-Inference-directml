@@ -22,8 +22,8 @@ Bug needed to fix:
     --chop_forward.
     --memory leak?
 
-no clue to know how dml release memory😅
-so that would not be useful unless for small amout pic cycle. 
+maybe i should pin the memory in dml.
+
 
 
 **Below is original description.**
